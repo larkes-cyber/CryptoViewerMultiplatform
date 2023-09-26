@@ -8,6 +8,9 @@ import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -15,41 +18,51 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
+private val DarkColorPalette = Colors(
+    background = Color(0xFF131316),
+    primary = Color(0xFFEEEEEE),
+    secondPrimary = Color(0xFF40BF6A),
+    thirdPrimary = Color(0xFF575B66)
+)
+
+
+private val LightColorPalette = Colors(
+    background = Color(0xFF131316),
+    primary = Color(0xFFEEEEEE),
+    secondPrimary = Color(0xFF40BF6A),
+    thirdPrimary = Color(0xFF575B66)
+)
+
+data class Colors(
+    val background: Color,
+    val primary:Color,
+    val secondPrimary:Color,
+    val thirdPrimary:Color
+)
+
+
 @Composable
 fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        darkColors(
-            primary = Color(0xFFBB86FC),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
-    } else {
-        lightColors(
-            primary = Color(0xFF6200EE),
-            primaryVariant = Color(0xFF3700B3),
-            secondary = Color(0xFF03DAC5)
-        )
+    CompositionLocalProvider(
+        LocalColorProvider provides LightColorPalette
+    ) {
+        content()
     }
-    val typography = Typography(
-        body1 = TextStyle(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
-        )
-    )
-    val shapes = Shapes(
-        small = RoundedCornerShape(4.dp),
-        medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp)
-    )
+}
 
-    MaterialTheme(
-        colors = colors,
-        typography = typography,
-        shapes = shapes,
-        content = content
-    )
+
+
+object AppTheme {
+    val colors: Colors
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalColorProvider.current
+}
+
+val LocalColorProvider = staticCompositionLocalOf<Colors> {
+    error("fddfdd")
 }
