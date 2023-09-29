@@ -40,7 +40,10 @@ class CoinRemoteDataSourceImpl:CoinRemoteDataSource {
             }
             contentType(ContentType.Application.Json)
         }
-        return if(response.status.value == 200) Resource.Success(Json.decodeFromString<CoinDetailDto>(response.bodyAsText()))
+        return if(response.status.value == 200) {
+            val res = response.bodyAsText()
+            Resource.Success(Json.decodeFromString<CoinDetailDto>(res.substring(1, res.length - 1)))
+        }
         else Resource.Error(response.status.description)
     }
 }

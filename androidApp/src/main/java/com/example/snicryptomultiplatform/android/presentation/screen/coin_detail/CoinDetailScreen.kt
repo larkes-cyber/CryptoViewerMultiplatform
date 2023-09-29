@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,6 +40,7 @@ fun CoinDetailScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 Text(
                     text = "${coinDetailUIState.coin!!.rank}. ${coinDetailUIState.coin!!.name}(${coinDetailUIState.coin!!.symbol})",
                     fontSize = 22.sp,
@@ -47,9 +49,21 @@ fun CoinDetailScreen(
                 Text(
                     text = if(coinDetailUIState.coin!!.isActive) "active" else "not active",
                     fontSize = 16.sp,
-                    color = AppTheme.colors.secondPrimary
+                    color = AppTheme.colors.secondPrimary,
+                    fontStyle = FontStyle.Italic
                 )
             }
+            Text(
+                text = coinDetailUIState.coin!!.description,
+                fontSize = 16.sp,
+                color = AppTheme.colors.primary,
+                modifier = Modifier.padding(vertical = 20.dp)
+            )
+            Text(
+                text = "Tags",
+                fontSize = 20.sp,
+                color = AppTheme.colors.primary
+            )
         }
     }
 

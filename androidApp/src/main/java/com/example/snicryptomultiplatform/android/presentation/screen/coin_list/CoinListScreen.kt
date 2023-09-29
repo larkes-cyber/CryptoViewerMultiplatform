@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -17,11 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.snicryptomultiplatform.android.presentation.AppTheme
 
 @Composable
 fun CoinListScreen(
-    viewModel: CoinListViewModel = hiltViewModel()
+    viewModel: CoinListViewModel = hiltViewModel(),
+    navController: NavController
 ) {
 
     val coinListUIState by viewModel.coinListUIState.collectAsState()
@@ -59,25 +63,34 @@ fun CoinListScreen(
         }
 
         itemsIndexed(coinListUIState.coinList){index, item ->
-            Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                Column() {
+            Button(
+                onClick = {
+                    navController.navigate("/coin_detail")
+                },
+                contentPadding = PaddingValues(0.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
+                elevation = ButtonDefaults.elevation(0.dp)
+            ) {
+                Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                    Column() {
+                        Text(
+                            text = item.name,
+                            fontSize = 18.sp,
+                            color = AppTheme.colors.primary,
+                            modifier = Modifier.padding(bottom = 5.dp)
+                        )
+                        Text(
+                            text = item.symbol,
+                            fontSize = 15.sp,
+                            color = AppTheme.colors.thirdPrimary
+                        )
+                    }
                     Text(
-                        text = item.name,
-                        fontSize = 18.sp,
-                        color = AppTheme.colors.primary,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                    Text(
-                        text = item.symbol,
-                        fontSize = 15.sp,
-                        color = AppTheme.colors.thirdPrimary
+                        text =if(item.isActive) "active" else "not active",
+                        fontSize = 16.sp,
+                        color = AppTheme.colors.secondPrimary
                     )
                 }
-                Text(
-                    text =if(item.isActive) "active" else "not active",
-                    fontSize = 16.sp,
-                    color = AppTheme.colors.secondPrimary
-                )
             }
             Spacer(modifier = Modifier.height(20.dp))
         }

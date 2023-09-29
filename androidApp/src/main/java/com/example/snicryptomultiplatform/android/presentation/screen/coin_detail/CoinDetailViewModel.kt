@@ -29,12 +29,11 @@ class CoinDetailViewModel @Inject constructor(
     private fun observeCoinDetail(){
         viewModelScope.launch {
             _coinDetailUIState.value = CoinDetailUIState(isLoading = true)
-            when(val coin = coinRepository.getCoinById(savedStateHandle.get<String>("coinId")!!)){
+            when(val coin = coinRepository.getCoinById("usdt-tether")){
                 is Resource.Success -> _coinDetailUIState.value = CoinDetailUIState(coin = coin.data!!)
                 is Resource.Error -> _coinDetailUIState.value = CoinDetailUIState(error = coin.message!!)
             }
         }
     }
-
-
+//savedStateHandle.get<String>("coinId")!!
 }

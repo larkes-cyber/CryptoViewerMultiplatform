@@ -1,28 +1,18 @@
 package com.example.snicryptomultiplatform.data.remote.dto
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
+@Serializable
+
 data class CoinDto(
-
-	@SerialName("symbol")
-	val symbol: String? = null,
-
-	@SerialName("is_active")
-	val isActive: Boolean? = null,
-
-	@SerialName("is_new")
-	val isNew: Boolean? = null,
-
-	@SerialName("name")
-	val name: String? = null,
-
-	@SerialName("rank")
-	val rank: Int? = null,
-
-	@SerialName("id")
-	val id: String? = null,
-
-	@SerialName("type")
-	val type: String? = null
+    val id: String,
+    @SerialName("is_active")
+    val isActive: Boolean,
+    @SerialName("is_new")
+    val isNew: Boolean,
+    val name: String,
+    val rank: Int,
+    val symbol: String,
+    val type: String
 )

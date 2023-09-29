@@ -1,16 +1,11 @@
 package com.example.snicryptomultiplatform.data.remote.dto
 
-import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
+@Serializable
+
 data class TeamMember(
-
-	@SerialName("name")
-	val name: String? = null,
-
-	@SerialName("id")
-	val id: String? = null,
-
-	@SerialName("position")
-	val position: String? = null
+    val id: String,
+    val name: String,
+    val position: String
 )
