@@ -23,8 +23,8 @@ fun CoinDetailDto.toCoinDetail():CoinDetail{
         symbol = symbol!!,
         rank = rank!!,
         isActive = isActive!!,
-        tags = tags!!.map { it!!.name!! },
-        team = team!!.map { it!! }
+        tags = tags?.map { it!!.name!! } ?: listOf(),
+        team = team?.map { it!! } ?: listOf()
     )
 }
 
