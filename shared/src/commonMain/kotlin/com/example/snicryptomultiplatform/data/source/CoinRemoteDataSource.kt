@@ -2,7 +2,6 @@ package com.example.snicryptomultiplatform.data.source
 
 import com.example.snicryptomultiplatform.data.remote.dto.CoinDetailDto
 import com.example.snicryptomultiplatform.data.remote.dto.CoinDto
-import com.example.snicryptomultiplatform.domain.model.Coin
 import com.example.snicryptomultiplatform.until.Resource
 
 interface CoinRemoteDataSource {

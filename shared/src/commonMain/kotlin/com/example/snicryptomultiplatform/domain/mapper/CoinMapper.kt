@@ -2,7 +2,6 @@ package com.example.snicryptomultiplatform.domain.mapper
 
 import com.example.snicryptomultiplatform.data.remote.dto.CoinDetailDto
 import com.example.snicryptomultiplatform.data.remote.dto.CoinDto
-import com.example.snicryptomultiplatform.data.remote.dto.TeamMember
 import com.example.snicryptomultiplatform.domain.model.Coin
 import com.example.snicryptomultiplatform.domain.model.CoinDetail
 

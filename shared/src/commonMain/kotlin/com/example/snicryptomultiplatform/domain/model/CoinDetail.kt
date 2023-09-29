@@ -1,6 +1,7 @@
 package com.example.snicryptomultiplatform.domain.model
 
-import com.example.snicryptomultiplatform.data.remote.dto.TeamMember
+import com.example.snicryptomultiplatform.data.remote.dto.TeamItem
+
 
 data class CoinDetail(
     val coinId: String,
@@ -10,5 +11,5 @@ data class CoinDetail(
     val rank: Int,
     val isActive: Boolean,
     val tags: List<String>,
-    val team: List<TeamMember>
+    val team: List<TeamItem>
 )

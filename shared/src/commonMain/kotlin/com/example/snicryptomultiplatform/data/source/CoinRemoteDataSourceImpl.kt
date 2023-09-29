@@ -34,15 +34,14 @@ class CoinRemoteDataSourceImpl:CoinRemoteDataSource {
     }
 
     override suspend fun getCoinById(coinId: String):Resource<CoinDetailDto> {
-        val response: HttpResponse = client.get(CoinRemoteDataSource.Endpoints.CoinDetail.url){
+        val response: HttpResponse = client.get("${CoinRemoteDataSource.Endpoints.CoinDetail.url}/$coinId"){
             url{
                 parameters.append("coinId",coinId)
             }
             contentType(ContentType.Application.Json)
         }
         return if(response.status.value == 200) {
-            val res = response.bodyAsText()
-            Resource.Success(Json.decodeFromString<CoinDetailDto>(res.substring(1, res.length - 1)))
+            Resource.Success(Json.decodeFromString<CoinDetailDto>(response.bodyAsText()))
         }
         else Resource.Error(response.status.description)
     }

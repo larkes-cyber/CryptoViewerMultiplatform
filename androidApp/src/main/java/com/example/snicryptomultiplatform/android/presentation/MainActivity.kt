@@ -6,11 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavArgument
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgs
+import androidx.navigation.navArgument
 import com.example.snicryptomultiplatform.android.presentation.screen.coin_detail.CoinDetailScreen
 import com.example.snicryptomultiplatform.android.presentation.screen.coin_list.CoinListScreen
+import com.example.snicryptomultiplatform.android.presentation.untils.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,12 +25,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             MyApplicationTheme {
-                NavHost(navController = navController, startDestination = "/coin_list" ){
-                    composable("/coin_list"){
+                NavHost(navController = navController, startDestination = Screen.CoinListScreen.route ){
+                    composable(Screen.CoinListScreen.route){
                         CoinListScreen(navController = navController)
                     }
-                    composable("/coin_detail"){
-                        CoinDetailScreen(navController = navController, coinId = "btc-bitcoin")
+                    composable(
+                        route = Screen.CoinDetailScreen.route + "/{coinId}",
+                        arguments = listOf(
+                            navArgument("coinId"){
+                                type = NavType.StringType
+                                defaultValue = ""
+                            }
+                        )
+                    ){entry ->
+                        CoinDetailScreen(navController = navController)
                     }
                 }
             }

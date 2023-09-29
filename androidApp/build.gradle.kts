@@ -47,4 +47,6 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation ("androidx.navigation:navigation-compose:2.5.3")
+
+    implementation ("com.google.accompanist:accompanist-flowlayout:0.17.0")
 }

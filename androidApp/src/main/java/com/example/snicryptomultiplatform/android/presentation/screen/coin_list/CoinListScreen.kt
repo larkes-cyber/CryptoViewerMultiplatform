@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.snicryptomultiplatform.android.presentation.AppTheme
+import com.example.snicryptomultiplatform.android.presentation.untils.Screen
 
 @Composable
 fun CoinListScreen(
@@ -57,7 +58,7 @@ fun CoinListScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ){
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(color = AppTheme.colors.secondPrimary)
                 }
             }
         }
@@ -65,7 +66,7 @@ fun CoinListScreen(
         itemsIndexed(coinListUIState.coinList){index, item ->
             Button(
                 onClick = {
-                    navController.navigate("/coin_detail")
+                    navController.navigate(Screen.CoinDetailScreen.withArgs(item.id))
                 },
                 contentPadding = PaddingValues(0.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
