@@ -17,9 +17,9 @@ class CoinRemoteDataSourceImpl:CoinRemoteDataSource {
 
     private val client = httpClient(){
         install(ContentNegotiation){
-            json(Json{
-                prettyPrint = true
-                isLenient = true
+            json(Json
+                {
+                ignoreUnknownKeys = true
             })
         }
     }
@@ -27,6 +27,9 @@ class CoinRemoteDataSourceImpl:CoinRemoteDataSource {
 
     override suspend fun getCoins(): Resource<List<CoinDto>> {
         val response: HttpResponse = client.get(CoinRemoteDataSource.Endpoints.Coins.url){
+            url{
+                parameters.append("limit","10")
+            }
             contentType(ContentType.Application.Json)
         }
        return if(response.status.value == 200) Resource.Success(Json.decodeFromString<List<CoinDto>>(response.bodyAsText()))
@@ -41,7 +44,7 @@ class CoinRemoteDataSourceImpl:CoinRemoteDataSource {
             contentType(ContentType.Application.Json)
         }
         return if(response.status.value == 200) {
-            Resource.Success(Json.decodeFromString<CoinDetailDto>(response.bodyAsText()))
+            Resource.Success(Json{ignoreUnknownKeys = true}.decodeFromString<CoinDetailDto>(response.bodyAsText()))
         }
         else Resource.Error(response.status.description)
     }

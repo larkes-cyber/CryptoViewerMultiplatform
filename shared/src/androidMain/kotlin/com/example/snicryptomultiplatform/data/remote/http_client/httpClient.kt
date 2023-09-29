@@ -9,8 +9,8 @@ import kotlinx.serialization.json.Json
 actual fun httpClient(config: HttpClientConfig<*>.()-> Unit) = HttpClient(CIO) {
     install(ContentNegotiation){
         json(Json{
-            prettyPrint = true
-            isLenient = true
+            ignoreUnknownKeys = true
         })
+
     }
 }
