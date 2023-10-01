@@ -14,8 +14,9 @@ extension CoinListScreen{
     @MainActor class CoinListViewModel:ObservableObject{
         
         private var coinRepository:CoinRepository
-        
         @Published var coinList:[Coin]? = nil
+        @Published var selectedCoinId:String? = nil
+        @Published var isSelectedCoin:Bool = false
         
         init(coinRepository: CoinRepository) {
             self.coinRepository = coinRepository
@@ -23,7 +24,11 @@ extension CoinListScreen{
                 self.coinList = coins?.data as! [Coin]
             })
         }
-                
+        
+        func setCoinId(coinId:String){
+            self.selectedCoinId = coinId
+            self.isSelectedCoin = true
+        }
         
     }
 }
