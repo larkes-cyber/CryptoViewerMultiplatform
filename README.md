@@ -2,6 +2,7 @@ Tech:
 - Kotlin-Multiplatform
 - Jetpack Compose/SwiftUI
 - Ktor-Client
+  
 Features:
 - Crypto api
 - Android/Ios
