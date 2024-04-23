@@ -1,11 +1,13 @@
-Tech:
+## Tech:
 - Kotlin-Multiplatform
 - Jetpack Compose/SwiftUI
 - Ktor-Client
   
-Features:
+## Features:
 - Crypto api
 - Android/Ios
+
+## Screens
 
 ![image](https://github.com/larkes-cyber/CryptoViewerMultiplatform/assets/79082708/5812bb9a-6042-453b-b291-1841060d513f)
 
